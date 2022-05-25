@@ -30,9 +30,14 @@
     <mat-grid-list cols="2" rowHeight="2:1">
 
         <mat-form-field>
-            <mat-label>CONNECTION TYPE</mat-label>
-            <input matInput formControlName="CONNECTION_TYPE" placeholder="" type="text" class="example-right-align">
-          
+            <mat-label>SELECT CONNECTION TYPE</mat-label>
+            <mat-select formControlName="CONNECTION_TYPE">
+               
+                <mat-option *ngFor="let key of assetConn" [value]="key.NAME">
+                {{key.NAME}}    
+                </mat-option>
+               
+              </mat-select>
         </mat-form-field>
 
         <mat-form-field>
@@ -45,15 +50,27 @@
     <mat-grid-list cols="2" rowHeight="2:1">
 
         <mat-form-field>
-            <mat-label>SENSOR</mat-label>
-            <input matInput formControlName="SENSOR" placeholder="" type="text" class="example-right-align">
-          
+            <mat-label>SELECT SENSOR</mat-label>
+            <mat-select  (selectionChange)="onSENSORChange($event)" formControlName="SENSOR">
+               
+                <mat-option *ngFor="let key of assetSensors" [value]="key.PID">
+                {{key.NAME}}    
+                </mat-option>
+               
+              </mat-select>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>SENSOR CATEGORY</mat-label>
-            <input matInput formControlName="SENSOR_CATEGORY" placeholder="" type="text" class="example-right-align">
-          </mat-form-field>
+            <!-- <input matInput formControlName="SENSOR_CATEGORY" placeholder="" type="text" class="example-right-align"> -->
+            <mat-select formControlName="SENSOR_CATEGORY">
+               
+                <mat-option *ngFor="let key of assetSubSensors" [value]="key.CATEGORY_NAME">
+                {{key.CATEGORY_NAME}}    
+                </mat-option>
+               
+              </mat-select>  
+        </mat-form-field>
 
     </mat-grid-list>
 

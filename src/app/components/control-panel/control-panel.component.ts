@@ -8,21 +8,33 @@ import { AddAssetConfigComponent } from '../dialogs/add-asset-config/add-asset-c
   styleUrls: ['./control-panel.component.scss']
 })
 export class ControlPanelComponent implements OnInit {
-
+tabIndex:number=0;
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
   tabChanged(e: any) {
     console.log(e.index)
+    this.tabIndex=e.index;//active tab
+
   }
   openDialog() {
+    if(this.tabIndex===0){
+    // this.dialog.open(AddAssetConfigComponent, {
+    //   width: '800px',
+    //   data: null
+    // });
+  }else  if(this.tabIndex===0){
+    // this.dialog.open(AddAssetConfigComponent, {
+    //   width: '800px',
+    //   data: null
+    // });
+  }else  if(this.tabIndex===2){
     this.dialog.open(AddAssetConfigComponent, {
       width: '800px',
-      data: {
-        animal: 'panda',
-      },
+      data:null
     });
+  }
   }
   dialogClose(e:any){
     console.log(e)

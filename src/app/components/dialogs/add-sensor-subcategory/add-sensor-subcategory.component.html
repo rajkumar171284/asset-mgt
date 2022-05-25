@@ -1,0 +1,29 @@
+<form class="form-container" [formGroup]="newForm">
+    <mat-grid-list cols="1" rowHeight="2:1">
+
+        <mat-form-field>
+            <mat-label>SENSOR NAME</mat-label>
+            <input readonly="true" formControlName="NAME" matInput placeholder="" type="text" class="example-right-align">
+           </mat-form-field>
+
+       
+
+    </mat-grid-list>
+    <mat-grid-list cols="1" rowHeight="2:1">
+
+        <mat-form-field>
+            <mat-label>CATEGORY NAME</mat-label>
+            <input formControlName="CATEGORY_NAME" matInput placeholder="" type="text" class="example-right-align">
+           </mat-form-field>
+
+    </mat-grid-list>
+
+    <mat-grid-list cols="10">
+        <button (click)="confirmData()" mat-raised-button color="primary">Save</button>
+
+        <button mat-raised-button (click)="confirmClose()"  color="warn">Cancel</button>
+
+
+        </mat-grid-list>
+
+</form>

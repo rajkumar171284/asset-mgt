@@ -5,12 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import {SharedModule} from './shared/shared.module';
+import { SharedModule } from './shared/shared.module';
 import { ReportsComponent } from './components/reports/reports.component';
-import{AuthService} from './services/auth.service';
-import { HttpClientModule,HttpClient } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -19,11 +18,11 @@ import { HttpClientModule,HttpClient } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,FormsModule,ReactiveFormsModule,
-    BrowserAnimationsModule,SharedModule,HttpClientModule
+    AppRoutingModule, FormsModule, ReactiveFormsModule,
+    BrowserAnimationsModule, SharedModule,
   ],
-  
-  providers: [AuthService,HttpClient],
+
+  providers: [AuthService, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

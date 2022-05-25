@@ -8,10 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { HttpClientModule,HttpClient } from '@angular/common/http';
 import{AuthService} from '../services/auth.service';
-
 @NgModule({
   declarations: [
-    SigninComponent,
+    SigninComponent
   ],
   imports: [
     CommonModule,LoginRoutingModule,SharedModule,MatInputModule,

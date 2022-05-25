@@ -16,7 +16,7 @@ export class AuthService {
 
   getSessionData(){
     const session=JSON.parse(JSON.stringify(sessionStorage.getItem('session')));
-    return JSON.parse(session)
+    return JSON.parse(session);
   }
   authLogin(params: any): Observable<any> {
     return this.http.post(`${environment.url}/asset/login`, params, options).pipe(map(response => {
@@ -35,6 +35,28 @@ export class AuthService {
       return response;
     }))
   }
+  
+  getAssetConn(params: any): Observable<any> {
+    return this.http.get(`${environment.url}/asset/getAssetConnections`, options).pipe(map(response => {
+      return response;
+    }))
+  }
+  getAllSensors(params: any): Observable<any> {
+    return this.http.get(`${environment.url}/asset/getAllSensors`, options).pipe(map(response => {
+      return response;
+    }))
+  }
 
+  addSubSensor(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/addSensorSubCatg`, params, options).pipe(map(response => {
+      return response;
+    }))
+  }
+  getSubSensorCatg(params: any): Observable<any> {
+    return this.http.get(`${environment.url}/asset/getSubCatgSensorByID/${params.SENSOR_TYPE_ID}`, options).pipe(map(response => {
+      return response;
+    }))
+  }
+  
   
 }

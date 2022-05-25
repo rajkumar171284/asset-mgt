@@ -1,4 +1,4 @@
-import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { Component, Inject,OnInit,Output,EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../../../services/auth.service';
@@ -11,7 +11,11 @@ import { AuthService } from '../../../services/auth.service';
 export class AddAssetConfigComponent implements OnInit {
   @Output() dialogClose:any=new EventEmitter();
   newForm: FormGroup;
-  constructor(private dataService: AuthService, private fb: FormBuilder, public dialog: MatDialog) {
+  assetConn:any=[];
+  assetSensors:any=[];
+  assetSubSensors:any=[];
+  constructor(private dataService: AuthService, private fb: FormBuilder, public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     this.newForm = this.fb.group({
       ASSET_NAME: ['', Validators.required],
       ASSET_TYPE: ['', Validators.required],
@@ -25,8 +29,28 @@ export class AddAssetConfigComponent implements OnInit {
       MAC_ADDRESS: ['', Validators.required],
 
     })
+    if(data){
+      console.log(data)
+      // edit
+      this.newForm.patchValue(data);
+    }
+
+    this.initCall()
   }
 
+  initCall(){
+    this.dataService.getAssetConn({}).subscribe(conn=>{
+      if(conn){
+        this.assetConn=conn.data;
+        // get all sensors
+        this.dataService.getAllSensors({}).subscribe(sens=>{
+          this.assetSensors=sens.data;
+          
+
+        })
+      }
+    })
+  }
   ngOnInit(): void {
   }
 
@@ -64,5 +88,16 @@ export class AddAssetConfigComponent implements OnInit {
   confirmClose() {
     this.dialog.closeAll()
 
+  }
+  onSENSORChange(event:any){
+    console.log(event)
+    const value= this.newForm.get('SENSOR')?.value;
+    let params = { SENSOR_TYPE_ID: value };
+    this.dataService.getSubSensorCatg(params).subscribe(res => {
+      this.assetSubSensors = res.data.map((el: any, index: number) => {
+
+        return el;
+      });
+    })
   }
 }

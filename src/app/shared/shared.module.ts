@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule,HttpClient } from '@angular/common/http';
 
 import { SharedRoutingModule } from './shared-routing.module';
 
@@ -54,10 +55,15 @@ import {ConfigComponent} from '../components/config/config.component';
 import { ControlPanelComponent } from '../components/control-panel/control-panel.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AddAssetConfigComponent } from '../components/dialogs/add-asset-config/add-asset-config.component';
+import { AssetConnectionsTypeComponent } from '../components/asset-connections-type/asset-connections-type.component';
+import { AddAssetConnectionComponent } from '../components/dialogs/add-asset-connection/add-asset-connection.component';
+import { AddSensorSubcategoryComponent } from '../components/dialogs/add-sensor-subcategory/add-sensor-subcategory.component';
+import {SensorsComponent} from '../components/sensors/sensors.component';
 
 @NgModule({
   declarations: [    SidenavComponent,ConfigComponent,ControlPanelComponent,
-    AddAssetConfigComponent
+    AddAssetConfigComponent,AssetConnectionsTypeComponent,AddAssetConnectionComponent,
+    AddSensorSubcategoryComponent,SensorsComponent
   ],
   imports: [
     CommonModule,
@@ -105,7 +111,7 @@ import { AddAssetConfigComponent } from '../components/dialogs/add-asset-config/
     MatTreeModule,
     OverlayModule,
     PortalModule,
-    ScrollingModule,
+    ScrollingModule,HttpClientModule
   ]
 })
 export class SharedModule { }

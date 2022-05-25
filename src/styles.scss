@@ -13,3 +13,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     // display: flex;
     justify-content: center;
   }
+  .demo-table ,.inner-tbl{
+    width: 100%;
+  }
+  .btn-layer{
+    display: flex;
+    justify-content: right;
+  }
+  .inner-tbl tr th{
+    background: #39395f;font-size: xx-small;text-transform: uppercase;
+    color:#fff;font-weight: 300;padding: 10px;
+  }
+  .inner-tbl tr td{
+    background: #d3d3ff;
+    color:#000;
+    border-bottom:1px solid #ddd;padding: 10px;
+  }

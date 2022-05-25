@@ -7,11 +7,20 @@
 
 </mat-toolbar>
 <mat-tab-group mat-align-tabs="start" animationDuration="0ms" (selectedTabChange)="tabChanged($event)">
+  <mat-tab label="Connection Types">
+    <app-asset-connections-type></app-asset-connections-type>
+  </mat-tab>
+
+  <mat-tab label="Sensors">
+    <app-sensors></app-sensors>
+  </mat-tab>
+
+  
     <mat-tab  label="Asset Configuration"> 
     
       <app-config (dialogClose)="dialogClose($event)"></app-config>
     </mat-tab>
-    <mat-tab label="Second"> Content 2 </mat-tab>
-    <mat-tab label="Third"> Content 3 </mat-tab>
+    <!-- <mat-tab label="Second"> Content 2 </mat-tab>
+    <mat-tab label="Third"> Content 3 </mat-tab> -->
   </mat-tab-group>
   
