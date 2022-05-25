@@ -3,3 +3,13 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+.mat-tab-label, .mat-tab-label-content{
+    color:#444 !important;
+  }
+  .mat-header-cell{
+    text-transform: uppercase;
+  }
+  .form-container{
+    // display: flex;
+    justify-content: center;
+  }

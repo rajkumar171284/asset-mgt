@@ -1,1 +1,75 @@
-<p>config works!</p>
+<mat-card>
+  
+
+    <table mat-table [dataSource]="dataSource" class="demo-table">
+
+      <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <!-- <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container> -->
+
+      <ng-container matColumnDef="Asset_Name">
+        <th mat-header-cell *matHeaderCellDef> Asset Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.ASSET_NAME}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Asset_Type">
+        <th mat-header-cell *matHeaderCellDef> Asset Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.ASSET_TYPE}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Industrial_Type">
+        <th mat-header-cell *matHeaderCellDef> Industrial Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.INDUSTRIAL_TYPE}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Industrial_Data_source">
+        <th mat-header-cell *matHeaderCellDef> Industrial Data source</th>
+        <td mat-cell *matCellDef="let element"> {{element.INDUSTRIAL_DATA_SOURCE}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Connection_Type">
+        <th mat-header-cell *matHeaderCellDef> Connection Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.CONNECTION_TYPE}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Tracking_Device_Type">
+        <th mat-header-cell *matHeaderCellDef> Tracking Device </th>
+        <td mat-cell *matCellDef="let element"> {{element.TRACKING_DEVICE}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Sensor_Type">
+        <th mat-header-cell *matHeaderCellDef> Sensor </th>
+        <td mat-cell *matCellDef="let element"> {{element.SENSOR}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Sub_Category_Sensor_Type">
+        <th mat-header-cell *matHeaderCellDef>Sensor Category</th>
+        <td mat-cell *matCellDef="let element"> {{element.SENSOR_CATEGORY}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Sensor_Data_Type">
+        <th mat-header-cell *matHeaderCellDef> Sensor Data Type</th>
+        <td mat-cell *matCellDef="let element"> {{element.SENSOR_DATA_TYPE}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="MAC_Address">
+        <th mat-header-cell *matHeaderCellDef> MAC Address </th>
+        <td mat-cell *matCellDef="let element"> {{element.MAC_ADDRESS}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr *ngIf="dataSource.length==0">
+
+        <td mat-cell *matCellDef> No Data </td>
+
+      </tr>
+    </table>
+    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+    </mat-paginator>
+
+
+</mat-card>

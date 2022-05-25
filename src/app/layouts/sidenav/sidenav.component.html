@@ -7,7 +7,7 @@
         <div class="logo-right logo">
 
         <button (click)="logOut()" mat-button>
-          Hi,User <mat-icon>account_box</mat-icon>
+          Hi,{{session && session.LOGIN_NAME?session.LOGIN_NAME:''}} <mat-icon>account_box</mat-icon>
 
         </button>
         <!-- <img class="" src="assets/inspirisys-logo.png"/> -->
@@ -23,7 +23,7 @@
         
         <mat-list role="list" style="padding-top: 0;">
           <mat-list-item class="logo" role="listitem" >
-            <img class="" src="assets/AJM-Logo.png"/>
+            <img class="" src="assets/inspirisys-logo.png"/>
             <span style="color:#888;margin-left:5px;"></span>
             <button color="dark" class="pull-right" mat-button (click)="sidenav.toggle()">
               <mat-icon >menu</mat-icon>
@@ -36,11 +36,11 @@
               <!-- <mat-icon>equalizer</mat-icon> -->
               Dashboard
             </a>
-            <!-- <a mat-list-item >
+            <a mat-list-item routerLink="/home/control-panel" routerLinkActive="active-list-item">
               
-              Control Panel 
+              Control Panel
             </a>
-            <a mat-list-item>Reports</a> -->
+            <a mat-list-item routerLinkActive="active-list-item">Reports</a>
           </mat-nav-list>
 
           

@@ -46,20 +46,25 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 // common components
 import { SidenavComponent } from '../layouts/sidenav/sidenav.component';
 import {ConfigComponent} from '../components/config/config.component';
+import { ControlPanelComponent } from '../components/control-panel/control-panel.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { AddAssetConfigComponent } from '../components/dialogs/add-asset-config/add-asset-config.component';
 
 @NgModule({
-  declarations: [    SidenavComponent,ConfigComponent
+  declarations: [    SidenavComponent,ConfigComponent,ControlPanelComponent,
+    AddAssetConfigComponent
   ],
   imports: [
     CommonModule,
-    SharedRoutingModule,
+    SharedRoutingModule,FormsModule,ReactiveFormsModule,
     A11yModule,
     ClipboardModule,
-    CdkStepperModule,
+    CdkStepperModule,MatFormFieldModule,
     CdkTableModule,
     CdkTreeModule,
     DragDropModule,

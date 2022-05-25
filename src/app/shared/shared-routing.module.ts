@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SidenavComponent } from '../layouts/sidenav/sidenav.component';
 import {ConfigComponent} from '../components/config/config.component';
+import { ControlPanelComponent } from '../components/control-panel/control-panel.component';
 
 const routes: Routes = [
   {
@@ -10,8 +11,8 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     children:[
       {
-        path: 'dashboard',
-        component: ConfigComponent
+        path: 'home/control-panel',
+        component: ControlPanelComponent
       }
     ]
 },

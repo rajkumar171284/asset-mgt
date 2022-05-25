@@ -1,0 +1,82 @@
+<form class="form-container" [formGroup]="newForm">
+    <mat-grid-list cols="2" rowHeight="2:1">
+
+        <mat-form-field>
+            <mat-label>ASSET NAME</mat-label>
+            <input formControlName="ASSET_NAME" matInput placeholder="" type="text" class="example-right-align">
+           </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>ASSET TYPE</mat-label>
+            <input formControlName="ASSET_TYPE" matInput placeholder="" type="text" class="example-right-align">
+           </mat-form-field>
+
+    </mat-grid-list>
+
+    <mat-grid-list cols="2" rowHeight="2:1">
+
+        <mat-form-field>
+            <mat-label>INDUSTRIAL TYPE</mat-label>
+            <input matInput formControlName="INDUSTRIAL_TYPE" placeholder="" type="text" class="example-right-align">
+          
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>INDUSTRIAL DATA SOURCE</mat-label>
+            <input matInput formControlName="INDUSTRIAL_DATA_SOURCE" placeholder="" type="text" class="example-right-align">
+          </mat-form-field>
+
+    </mat-grid-list>
+    <mat-grid-list cols="2" rowHeight="2:1">
+
+        <mat-form-field>
+            <mat-label>CONNECTION TYPE</mat-label>
+            <input matInput formControlName="CONNECTION_TYPE" placeholder="" type="text" class="example-right-align">
+          
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>TRACKING DEVICE	</mat-label>
+            <input matInput formControlName="TRACKING_DEVICE" placeholder="" type="text" class="example-right-align">
+          </mat-form-field>
+
+    </mat-grid-list>
+
+    <mat-grid-list cols="2" rowHeight="2:1">
+
+        <mat-form-field>
+            <mat-label>SENSOR</mat-label>
+            <input matInput formControlName="SENSOR" placeholder="" type="text" class="example-right-align">
+          
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>SENSOR CATEGORY</mat-label>
+            <input matInput formControlName="SENSOR_CATEGORY" placeholder="" type="text" class="example-right-align">
+          </mat-form-field>
+
+    </mat-grid-list>
+
+    <mat-grid-list cols="2" rowHeight="2:1">
+
+        <mat-form-field>
+            <mat-label>SENSOR DATA TYPE</mat-label>
+            <input matInput formControlName="SENSOR_DATA_TYPE" placeholder="" type="text" class="example-right-align">
+          
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>MAC ADDRESS</mat-label>
+            <input matInput formControlName="MAC_ADDRESS" placeholder="" type="text" class="example-right-align">
+          </mat-form-field>
+
+    </mat-grid-list>
+    <mat-grid-list cols="10">
+        <button (click)="confirmData()" mat-raised-button color="primary">Save</button>
+
+        <button mat-raised-button (click)="confirmClose()"  color="warn">Cancel</button>
+
+
+        </mat-grid-list>
+
+</form>

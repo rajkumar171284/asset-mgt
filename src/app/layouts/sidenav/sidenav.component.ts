@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import{Router}from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -8,8 +8,8 @@ import{Router}from '@angular/router';
 })
 export class SidenavComponent implements OnInit {
   options: FormGroup;
-
-  constructor(fb: FormBuilder,private router:Router) {
+  session:any;
+  constructor(fb: FormBuilder, private router: Router) {
     this.options = fb.group({
       bottom: 0,
       fixed: true,
@@ -17,10 +17,13 @@ export class SidenavComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    const session=JSON.parse(JSON.stringify(sessionStorage.getItem('session')));
+    this.session=JSON.parse(session);
+    console.log(this.session.LOGIN_NAME)
   }
-  logOut(){
+  logOut() {
     sessionStorage.clear();
     this.router.navigate(['login'])
-     }
+  }
 
 }
