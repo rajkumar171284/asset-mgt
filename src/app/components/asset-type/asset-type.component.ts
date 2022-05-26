@@ -1,38 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {AddConnectionComponent} from '../dialogs/add-connection/add-connection.component';
+import { AddSensorComponent } from '../../components/dialogs/add-sensor/add-sensor.component';
+
 @Component({
-  selector: 'app-asset-connections-type',
-  templateUrl: './asset-connections-type.component.html',
-  styleUrls: ['./asset-connections-type.component.scss']
+  selector: 'app-asset-type',
+  templateUrl: './asset-type.component.html',
+  styleUrls: ['./asset-type.component.scss']
 })
-export class AssetConnectionsTypeComponent implements OnInit {
+export class AssetTypeComponent implements OnInit {
   dataSource = [];
   displayedColumns: string[] = [
     "PID", "NAME", "actions"]
   constructor(private dataService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.getAllAssetConn();
+    this.getAllAssets();
 
   }
 
-  async getAllAssetConn() {
+  async getAllAssets() {
     const session = await this.dataService.getSessionData();
     let params = { COMPANY_ID: session.COMPANY_ID };
-    this.dataService.getAssetConn(params).subscribe(res => {
+    this.dataService.getAllAssets(params).subscribe(res => {
       this.dataSource = res.data;
     })
   }
 
   editItem(item: any) {
-    const ref=this.dialog.open(AddConnectionComponent, {
+    this.dialog.open(AddSensorComponent, {
       width: '800px',
       data: item
     });
-
-    this.getAllAssetConn();
   }
   removeItem(item: any) {
 

@@ -4,10 +4,12 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { AuthService } from '../../services/auth.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddSensorSubcategoryComponent } from '../dialogs/add-sensor-subcategory/add-sensor-subcategory.component';
+import { AddSensorComponent } from '../../components/dialogs/add-sensor/add-sensor.component';
+
 interface PeriodicElement {
   PID: number;
   NAME: string;
-  subCatg:[];
+  subCatg: [];
 }
 @Component({
   selector: 'app-sensors',
@@ -23,7 +25,7 @@ interface PeriodicElement {
 })
 export class SensorsComponent implements OnInit {
   expandedElement: PeriodicElement | null | undefined;
-  indexedSensor:any;
+  indexedSensor: any;
   dataSource = [];
   displayedColumns: string[] = [
     "PID", "NAME", "actions"]
@@ -44,21 +46,28 @@ export class SensorsComponent implements OnInit {
     })
   }
 
-  editItem(item: any) {
-    this.dialog.open(AddSensorSubcategoryComponent, {
+  editItem(e: Event, item: any) {
+    e.stopPropagation();
+    const dialogRef = this.dialog.open(AddSensorComponent, {
       width: '800px',
       data: item
     });
-  }
-  removeItem(item: any) {
 
+    dialogRef.afterClosed().subscribe(result => {
+
+      this.getSensors();
+    });
+
+  }
+  removeItem(e: Event,item: any) {
+    e.stopPropagation();
   }
   expandItem(element: any) {
     console.log(element)
-    this.indexedSensor=element;
+    this.indexedSensor = element;
     this.getindexedSensor(this.indexedSensor);
   }
-  getindexedSensor(element:any){
+  getindexedSensor(element: any) {
     let params = { SENSOR_TYPE_ID: element.PID };
     this.dataService.getSubSensorCatg(params).subscribe(res => {
       element.subCatg = res.data.map((el: any, index: number) => {
@@ -70,7 +79,7 @@ export class SensorsComponent implements OnInit {
   }
   addSensorSubCatg(element: any) {
     console.log(element)
-    const dialogRef= this.dialog.open(AddSensorSubcategoryComponent, {
+    const dialogRef = this.dialog.open(AddSensorSubcategoryComponent, {
       width: '400px',
       data: element
     });

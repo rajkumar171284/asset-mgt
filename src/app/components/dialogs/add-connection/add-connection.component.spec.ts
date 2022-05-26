@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddAssetConnectionComponent } from './add-asset-connection.component';
+import { AddConnectionComponent } from './add-connection.component';
 
-describe('AddAssetConnectionComponent', () => {
-  let component: AddAssetConnectionComponent;
-  let fixture: ComponentFixture<AddAssetConnectionComponent>;
+describe('AddConnectionComponent', () => {
+  let component: AddConnectionComponent;
+  let fixture: ComponentFixture<AddConnectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddAssetConnectionComponent ]
+      declarations: [ AddConnectionComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddAssetConnectionComponent);
+    fixture = TestBed.createComponent(AddConnectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

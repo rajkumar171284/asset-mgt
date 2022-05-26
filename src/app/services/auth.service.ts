@@ -26,16 +26,21 @@ export class AuthService {
 
   
   addAssetConfig(params: any): Observable<any> {
-    return this.http.post(`${environment.url}/asset/addAsset`, params, options).pipe(map(response => {
+    return this.http.post(`${environment.url}/asset/addAssetConfig`, params, options).pipe(map(response => {
       return response;
     }))
   }
   getAssetConfig(params: any): Observable<any> {
-    return this.http.get(`${environment.url}/asset/getAllAssets/${params.COMPANY_ID}`, options).pipe(map(response => {
+    return this.http.get(`${environment.url}/asset/getAllAssetsConfig/${params.COMPANY_ID}`, options).pipe(map(response => {
       return response;
     }))
   }
-  
+  // asset connection starts
+  addConnection(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/addConnection`, params, options).pipe(map(response => {
+      return response;
+    }))
+  }
   getAssetConn(params: any): Observable<any> {
     return this.http.get(`${environment.url}/asset/getAssetConnections`, options).pipe(map(response => {
       return response;
@@ -47,6 +52,12 @@ export class AuthService {
     }))
   }
 
+  
+  addSensor(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/addSensor`, params, options).pipe(map(response => {
+      return response;
+    }))
+  }
   addSubSensor(params: any): Observable<any> {
     return this.http.post(`${environment.url}/asset/addSensorSubCatg`, params, options).pipe(map(response => {
       return response;
@@ -58,5 +69,11 @@ export class AuthService {
     }))
   }
   
+  // assets starts
+  getAllAssets(params: any): Observable<any> {
+    return this.http.get(`${environment.url}/asset/getAllAssets`, options).pipe(map(response => {
+      return response;
+    }))
+  }
   
 }

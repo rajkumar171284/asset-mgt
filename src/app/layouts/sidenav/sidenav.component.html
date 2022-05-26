@@ -4,10 +4,14 @@
           <mat-icon>menu</mat-icon>
 
         </button>
-        <div class="logo-right logo">
+        <div style="margin-left:10%;color:#fff">
+          Generic Asset Management
 
+        </div>
+        <div class="logo-right logo">
+          Hi,{{session && session.LOGIN_NAME?session.LOGIN_NAME:''}} 
         <button (click)="logOut()" mat-button>
-          Hi,{{session && session.LOGIN_NAME?session.LOGIN_NAME:''}} <mat-icon>account_box</mat-icon>
+        <mat-icon>logout</mat-icon>
 
         </button>
         <!-- <img class="" src="assets/inspirisys-logo.png"/> -->
