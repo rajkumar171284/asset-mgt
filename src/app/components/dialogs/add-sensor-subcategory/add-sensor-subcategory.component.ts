@@ -8,6 +8,8 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./add-sensor-subcategory.component.scss'], providers: [AuthService]
 })
 export class AddSensorSubcategoryComponent implements OnInit {
+  public typeName:any;
+
   @Output() dialogClose: any = new EventEmitter();
   newForm: FormGroup;
   constructor(private dataService: AuthService, private fb: FormBuilder, public dialog: MatDialog,
@@ -29,7 +31,7 @@ export class AddSensorSubcategoryComponent implements OnInit {
       });
      
     }else if (data && data.SENSOR_TYPE_ID){
-
+      this.typeName=data;
       this.newForm.patchValue(data);
       this.newForm.patchValue({
         NAME:data.NAME

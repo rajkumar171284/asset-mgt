@@ -29,4 +29,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color:#000;
     border-bottom:1px solid #ddd;padding: 10px;
   }
+  .form-container{
+    margin-top: 1em;
+}
+.title-center {
+    flex: 1 1 auto;
+  }
+  .form-container mat-label{
+  text-transform: uppercase;
+  }
+  .form-container button{
+    margin-right: 8px;
+  }
+
   

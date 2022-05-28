@@ -63,6 +63,10 @@ import { AddSensorComponent } from '../components/dialogs/add-sensor/add-sensor.
 import { AddConnectionComponent } from '../components/dialogs/add-connection/add-connection.component';
 import { AddAssetComponent } from '../components/dialogs/add-asset/add-asset.component';
 import { AssetTypeComponent } from '../components/asset-type/asset-type.component';
+import { TooltipComponent } from '../components/tooltip/tooltip.component';
+import { DashboardComponent } from '../components/dashboard/dashboard.component';
+import { WidgetComponent } from '../components/widget/widget.component';
+
 @NgModule({
   declarations: [SidenavComponent, ConfigComponent, ControlPanelComponent,
     AddAssetConfigComponent, AssetConnectionsTypeComponent,
@@ -70,7 +74,7 @@ import { AssetTypeComponent } from '../components/asset-type/asset-type.componen
     AddSensorComponent,
     AddConnectionComponent,
     AddAssetComponent,
-    AssetTypeComponent,
+    AssetTypeComponent,TooltipComponent, DashboardComponent, WidgetComponent
   ],
   imports: [
     CommonModule,

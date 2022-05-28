@@ -1,3 +1,9 @@
+<mat-toolbar color="primary">
+    <mat-grid-list class="title-center" cols="1" rowHeight="1:1">
+        {{typeName && typeName.PID?'Edit Connection':'Add New Connection'}}
+    </mat-grid-list>
+    
+</mat-toolbar>
 <form class="form-container" [formGroup]="newForm">
     <mat-grid-list cols="2" rowHeight="2:1">
 
@@ -60,10 +66,14 @@
               </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field *ngIf="assetSubSensors.length==0">
             <mat-label>SENSOR CATEGORY</mat-label>
-            <!-- <input matInput formControlName="SENSOR_CATEGORY" placeholder="" type="text" class="example-right-align"> -->
-            <mat-select formControlName="SENSOR_CATEGORY">
+            <input  matInput formControlName="SENSOR_CATEGORY" placeholder="" type="text" class="example-right-align">
+           
+        </mat-form-field>
+        <mat-form-field *ngIf="assetSubSensors.length>0">
+            <mat-label>SENSOR CATEGORY</mat-label>
+            <mat-select  formControlName="SENSOR_CATEGORY">
                
                 <mat-option *ngFor="let key of assetSubSensors" [value]="key.CATEGORY_NAME">
                 {{key.CATEGORY_NAME}}    

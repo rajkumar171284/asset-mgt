@@ -24,14 +24,20 @@ export class AuthService {
     }))
   }
 
-  
+  // asset config starts
   addAssetConfig(params: any): Observable<any> {
     return this.http.post(`${environment.url}/asset/addAssetConfig`, params, options).pipe(map(response => {
       return response;
     }))
   }
+  
   getAssetConfig(params: any): Observable<any> {
     return this.http.get(`${environment.url}/asset/getAllAssetsConfig/${params.COMPANY_ID}`, options).pipe(map(response => {
+      return response;
+    }))
+  }
+  deleteAssetConfigByID(params: any): Observable<any> {
+    return this.http.get(`${environment.url}/asset/deleteAssetConfig/${params.PID}`, options).pipe(map(response => {
       return response;
     }))
   }
@@ -75,5 +81,18 @@ export class AuthService {
       return response;
     }))
   }
+  // addAsset starts
+  addAsset(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/addAsset`, params, options).pipe(map(response => {
+      return response;
+    }))
+  }
+
+  // chart request add
   
+  addChartRequest(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/createChartRequest`, params, options).pipe(map(response => {
+      return response;
+    }))
+  }
 }

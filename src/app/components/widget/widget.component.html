@@ -1,0 +1,84 @@
+<mat-toolbar color="primary">
+    <mat-grid-list class="title-center" cols="1" rowHeight="1:1">
+        General Settings
+    </mat-grid-list>
+
+</mat-toolbar>
+<mat-accordion>
+
+<form [formGroup]="newForm">
+
+
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Chart Type
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <mat-grid-list cols="4" rowHeight="2:2">
+
+            <mat-grid-tile (click)="selectType(a)" class="chart-type" *ngFor="let a of chartTypes">
+
+                <mat-card [ngClass]="{'isSelected':a.isSelected==true}">
+                    <mat-card-subtitle>{{a.name}}</mat-card-subtitle>
+                    <mat-card-content>
+                        <img class="" src="assets/{{a.file}}.png" />
+                    </mat-card-content>
+                </mat-card>
+
+            </mat-grid-tile>
+
+        </mat-grid-list>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel (opened)="panelOpenState2 = true" (closed)="panelOpenState2 = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Chart Columns
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+        <!-- content -->
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Data Columns</mat-label>
+        
+                <mat-select formControlName="CHART_TYPE">
+               
+                    <mat-option *ngFor="let key of options" [value]="key.NAME">
+                    {{key.NAME}}    
+                    </mat-option>
+                   
+                  </mat-select>
+
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Data Source</mat-label>
+                <mat-select formControlName="CHART_DATA">
+               
+                    <mat-option *ngFor="let key of options" [value]="key.ASSET_TYPE">
+                    {{key.ASSET_TYPE}}    
+                    </mat-option>
+                   
+                  </mat-select>
+            </mat-form-field>
+
+
+
+    </mat-expansion-panel>
+
+
+
+    <mat-grid-list cols="10">
+        <button (click)="confirmData()" mat-raised-button color="primary">Create Chart</button>
+
+        <button mat-raised-button (click)="confirmClose()"  color="warn">Cancel</button>
+
+
+        </mat-grid-list>
+
+    </form>
+
+</mat-accordion>

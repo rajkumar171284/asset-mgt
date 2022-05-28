@@ -1,14 +1,16 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, Inject ,ViewChild} from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA, } from '@angular/material/dialog';
 import { AddAssetConfigComponent } from '../dialogs/add-asset-config/add-asset-config.component';
 import { AddSensorComponent } from '../../components/dialogs/add-sensor/add-sensor.component';
 import { AddConnectionComponent } from '../../components/dialogs/add-connection/add-connection.component';
 import {AddAssetComponent} from '../../components/dialogs/add-asset/add-asset.component';
+import { MatTabChangeEvent } from '@angular/material/tabs';
+
 enum tabLabel {
   'Connections' = 0,
   'Sensors' = 1,
-  'Configuration' = 2,
-  'Asset' = 3
+  'Configuration' = 3,
+  'Asset' = 2
 }
 @Component({
   selector: 'app-control-panel',
@@ -16,12 +18,16 @@ enum tabLabel {
   styleUrls: ['./control-panel.component.scss']
 })
 export class ControlPanelComponent implements OnInit {
+  @ViewChild('tabGroup') tabGroup:any;
+
   tabIndex: any = 0;
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
-  tabChanged(e: any) {
+  tabChanged(e:any) {
+    // e.stopPropagation();
+    console.log(e)
     this.tabIndex = e.index;//active tab
   }
   openDialog() {

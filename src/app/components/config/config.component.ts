@@ -3,6 +3,8 @@ import { config } from '../../myclass';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddAssetConfigComponent } from '../dialogs/add-asset-config/add-asset-config.component';
+import { TooltipComponent } from '../../components/tooltip/tooltip.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 enum tabs {
   config = 0,
@@ -41,15 +43,14 @@ export class ConfigComponent implements OnInit {
     "MAC_Address", "actions"
   ];
   dataSource: config[] = [];
-  constructor(private dataService: AuthService, public dialog: MatDialog) { }
+  constructor(private dataService: AuthService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-
-    console.log(tabs.config)
-    this.getAllAssets();
+    // console.log(tabs.config)
+    this.getAllAssetConfig();
   }
 
-  async getAllAssets() {
+  async getAllAssetConfig() {
     const session = await this.dataService.getSessionData();
     let params = { COMPANY_ID: session.COMPANY_ID };
     this.dataService.getAssetConfig(params).subscribe(res => {
@@ -58,12 +59,27 @@ export class ConfigComponent implements OnInit {
   }
 
   editItem(item: any) {
-    this.dialog.open(AddAssetConfigComponent, {
+    const dialogRef = this.dialog.open(AddAssetConfigComponent, {
       width: '800px',
       data: item
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      this.getAllAssetConfig();
     });
   }
   removeItem(item: any) {
 
+    this.dataService.deleteAssetConfigByID(item).subscribe(res => {
+
+      this.openSnackBar(res);
+      this.getAllAssetConfig();
+    })
+  }
+  openSnackBar(data:any) {
+    this._snackBar.openFromComponent(TooltipComponent, {
+      duration: 5 * 1000,
+      data:data.msg
+    });
   }
 }

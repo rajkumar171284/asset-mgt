@@ -1,3 +1,9 @@
+<mat-toolbar color="primary">
+    <mat-grid-list class="title-center" cols="1" rowHeight="1:1">
+        {{typeName && typeName.PID?'Edit Sensor':'Add New Sensor'}}
+    </mat-grid-list>
+    
+</mat-toolbar>
 <form class="form-container" [formGroup]="newForm">
     <mat-grid-list cols="1" rowHeight="2:1">
 

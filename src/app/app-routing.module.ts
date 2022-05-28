@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   
   {
-    path:'home/dashboard',
+    path:'home',
     loadChildren:()=>import ('./shared/shared.module').then(module=>module.SharedModule)
   },
 ];

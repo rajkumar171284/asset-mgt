@@ -32,6 +32,7 @@ export class SensorsComponent implements OnInit {
   constructor(private dataService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.expandedElement=null
     this.getSensors();
   }
 
@@ -62,8 +63,21 @@ export class SensorsComponent implements OnInit {
   removeItem(e: Event,item: any) {
     e.stopPropagation();
   }
+  isTableExpanded = false;
+
+  toggleTableRows() {
+    this.isTableExpanded = !this.isTableExpanded;
+
+    this.dataSource.forEach((row: any) => {
+      row.isExpanded = this.isTableExpanded;
+    })
+  }
   expandItem(element: any) {
     console.log(element)
+    this.dataSource.forEach((row: any) => {
+      row.isExpanded = this.isTableExpanded;
+    })
+    this.expandedElement = this.expandedElement === element ? null : element
     this.indexedSensor = element;
     this.getindexedSensor(this.indexedSensor);
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AddSensorComponent } from '../../components/dialogs/add-sensor/add-sensor.component';
+import {AddAssetComponent} from '../../components/dialogs/add-asset/add-asset.component';
 
 @Component({
   selector: 'app-asset-type',
@@ -11,7 +11,7 @@ import { AddSensorComponent } from '../../components/dialogs/add-sensor/add-sens
 export class AssetTypeComponent implements OnInit {
   dataSource = [];
   displayedColumns: string[] = [
-    "PID", "NAME", "actions"]
+    "PID", "NAME","ASSET_TYPE", "COMPONENTS", "actions"]
   constructor(private dataService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class AssetTypeComponent implements OnInit {
   }
 
   editItem(item: any) {
-    this.dialog.open(AddSensorComponent, {
+    this.dialog.open(AddAssetComponent, {
       width: '800px',
       data: item
     });
