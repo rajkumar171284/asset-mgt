@@ -37,7 +37,7 @@ export class AuthService {
     }))
   }
   deleteAssetConfigByID(params: any): Observable<any> {
-    return this.http.get(`${environment.url}/asset/deleteAssetConfig/${params.PID}`, options).pipe(map(response => {
+    return this.http.post(`${environment.url}/asset/deleteAssetConfig/${params.PID}`, options).pipe(map(response => {
       return response;
     }))
   }
@@ -49,6 +49,11 @@ export class AuthService {
   }
   getAssetConn(params: any): Observable<any> {
     return this.http.get(`${environment.url}/asset/getAssetConnections`, options).pipe(map(response => {
+      return response;
+    }))
+  }
+  deleteConn(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/deleteConnection/${params.PID}`, options).pipe(map(response => {
       return response;
     }))
   }
@@ -91,7 +96,22 @@ export class AuthService {
   // chart request add
   
   addChartRequest(params: any): Observable<any> {
-    return this.http.post(`${environment.url}/asset/createChartRequest`, params, options).pipe(map(response => {
+    return this.http.post(`${environment.url}/asset/addChartRequest`, params, options).pipe(map(response => {
+      return response;
+    }))
+  }
+  getAllChartRequests(params: any): Observable<any> {
+    return this.http.get(`${environment.url}/asset/allChartRequest/${params.IS_DRAGGED}`, options).pipe(map(response => {
+      return response;
+    }))
+  }
+  deleteChartRequests(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/deleteChartRequest/${params.PID}`, options).pipe(map(response => {
+      return response;
+    }))
+  }
+  chartRequestChangeStatus(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/chartRequestChangeStatus`,params, options).pipe(map(response => {
       return response;
     }))
   }

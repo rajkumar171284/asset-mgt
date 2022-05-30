@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddAssetComponent } from '../../components/dialogs/add-asset/add-asset.component';
@@ -29,9 +29,10 @@ export class WidgetComponent implements OnInit {
   { name: 'Line', file: 'line-chart', isSelected: false },
   { name: 'Donut', file: 'donut-chart', isSelected: false },
   { name: 'Pie', file: 'pie-chart', isSelected: false }]
-  panelOpenState = false;
-  panelOpenState2 = false;
-  panelOpenState3 = false;
+  panelOpenState = true;
+  panelOpenState2 = true;
+  panelOpenState3 = true;
+
   dataSource: any = [];
   isSelected = false;
 
@@ -43,15 +44,21 @@ export class WidgetComponent implements OnInit {
   newForm: FormGroup;
 
   constructor(private dataService: AuthService,private fb: FormBuilder, public dialog: MatDialog,
-    private _snackBar: MatSnackBar) {
+    private _snackBar: MatSnackBar,@Inject(MAT_DIALOG_DATA) public data: any) {
       this.newForm = this.fb.group({
         PID: [''],
-        CHART_NAME: ['', Validators.required],
+        NAME: ['', Validators.required],
         CHART_TYPE: ['', Validators.required],
         CHART_DATA:['', Validators.required],
-        SQL_QUERY:[]
+        SQL_QUERY:[],
+        IS_DRAGGED:0
 
      })
+     if (data && data.PID) {
+      // this.typeName=data;
+      this.newForm.patchValue(data);
+     
+    }
     }
 
   ngOnInit(): void {
@@ -72,7 +79,7 @@ export class WidgetComponent implements OnInit {
     })
     a.isSelected = this.isSelected;
     this.newForm.patchValue({
-      CHART_NAME:a.name.toLowerCase()
+      NAME:a.name.toLowerCase()
     })
 
 
@@ -88,11 +95,12 @@ export class WidgetComponent implements OnInit {
       this.Values.CREATED_BY = session.PID;
       const query = `SELECT * FROM ${this.Values.CHART_TYPE} WHERE PID=${this.Values.CHART_DATA}` ;
       this.Values.SQL_QUERY = JSON.stringify(query);
+      this.Values.IS_DRAGGED=0;
       console.log(this.Values)
       this.dataService.addChartRequest(this.Values).subscribe(res => {
         console.log(res)
         // this.dialogClose.emit(true);
-        // this.confirmClose();
+        this.confirmClose();
         this.openSnackBar()
       })
     }

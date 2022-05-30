@@ -35,6 +35,9 @@ export class AssetConnectionsTypeComponent implements OnInit {
     this.getAllAssetConn();
   }
   removeItem(item: any) {
+    this.dataService.deleteConn(item).subscribe(res => {
+      this.getAllAssetConn();
+    });
 
   }
 

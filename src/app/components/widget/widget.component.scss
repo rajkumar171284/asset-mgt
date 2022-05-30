@@ -1,6 +1,10 @@
 .mat-form-field + .mat-form-field {
     margin-left: 8px;
   }
+  .btn-cnt{
+    margin-top: 10px;
+
+  }
   .chart-type img{
       max-height: 90px;
     //   height: 70px;
@@ -10,5 +14,5 @@
     flex: 1 1 auto;
   }
   .isSelected{
-      background: red!important;
+      background: #09ea69!important;
   }

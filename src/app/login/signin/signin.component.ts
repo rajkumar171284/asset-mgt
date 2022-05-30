@@ -31,7 +31,7 @@ export class SigninComponent implements OnInit {
         if (res.status == 200 && res.data.length > 0) {
 
           sessionStorage.setItem('session', JSON.stringify(res.data[0]));
-          this.router.navigate(['home']);
+          this.router.navigate(['home/dashboard']);
         }else{
           sessionStorage.clear();
         }
