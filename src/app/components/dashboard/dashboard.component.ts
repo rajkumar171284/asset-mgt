@@ -1,4 +1,4 @@
-import { Component, OnInit,ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { WidgetComponent } from '../../components/widget/widget.component';
 import { AuthService } from '../../services/auth.service';
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
   MoviesList: string[] = [
   ];
   MoviesWatched: string[] = ['0'];
-   toEditRequest:any;
+  toEditRequest: any;
   ngOnInit(): void {
     console.log('dash')
     this.getMappedChartRequest();
@@ -50,8 +50,8 @@ export class DashboardComponent implements OnInit {
       this.doneList = res.data.map((el: chartItem) => {
         return el;
       });
-      this.MoviesWatched=res.data.length>0? this.doneList.map(x=>x.PID.toString()):['0'];
-      console.log(this.MoviesWatched)
+      this.MoviesWatched = res.data.length > 0 ? this.doneList.map(x => x.PID.toString()) : ['0'];
+      // console.log(this.MoviesWatched)
       this.getAllChartRequest();
     })
   }
@@ -66,8 +66,10 @@ export class DashboardComponent implements OnInit {
       this.getAllChartRequest();
     });
   }
-  editRequest(item:any){
-    this.toEditRequest=item;
+  async editRequest(pid: any) {
+    const data = await this.getRequestDetails(pid, 'json');
+
+    this.toEditRequest = data;
     this.openDialog();
   }
 
@@ -80,7 +82,8 @@ export class DashboardComponent implements OnInit {
       });
       this.overAllCharts = this.dataSource.concat(this.doneList);
       console.log(this.overAllCharts)
-      res.data.map((itm: chartItem) => {
+      this.MoviesList = res.data.map((itm: chartItem) => {
+        return itm.PID.toString();
 
         // return {
         //   PID: itm.PID,
@@ -90,12 +93,7 @@ export class DashboardComponent implements OnInit {
         //   SQL_QUERY: itm.SQL_QUERY,
         //   IS_DRAGGED: itm.IS_DRAGGED
         // }
-        if(!this.toEditRequest){
-        this.MoviesList.push(itm.PID.toString())
-        }else{
-          this.MoviesList
-          this.MoviesList.push(itm.PID.toString())
-        }
+
 
       })
       console.log(this.MoviesList)
@@ -112,36 +110,33 @@ export class DashboardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
-    // console.log(this.MoviesWatched)
-    // console.log(event.item.data)
 
-    const PID = parseInt(event.item.data)
-    // console.log(PID)
+    const PID = parseInt(event.item.data);
     if (PID) {
       this.changeStatus(PID)
     }
 
   }
   async changeStatus(pid: number) {
-    const data = await this.getRequestDetails(pid,'e');
+    const data = await this.getRequestDetails(pid, 'json');
     let params = {
       IS_DRAGGED: 1,
       PID: pid
     }
     console.log(data)
-    // this.dataService.chartRequestChangeStatus(params).subscribe(res => {
-    //   this.getMappedChartRequest();
+    this.dataService.chartRequestChangeStatus(params).subscribe(res => {
+      this.getMappedChartRequest();
 
-    // })
+    })
   }
   removeRequest(item: any) {
     this.dataService.deleteChartRequests({ PID: item }).subscribe(res => {
-      this.getMappedChartRequest();
+      this.ngOnInit();
     })
   }
   getRequestDetails(PID: any, val: string) {
     if (PID) {
-      console.log(PID)
+      // console.log(PID)
       const value = this.overAllCharts.filter((obj: chartItem) => {
         return obj.PID == parseInt(PID);
       })
@@ -151,7 +146,7 @@ export class DashboardComponent implements OnInit {
       }
       else if (value[0] && val == 'd') {
         return value[0].CHART_DATA;
-      }else if (value[0] && val == 'e') {
+      } else if (value[0] && val == 'json') {
         return value[0]
       }
     }

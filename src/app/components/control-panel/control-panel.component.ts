@@ -22,7 +22,10 @@ export class ControlPanelComponent implements OnInit {
 
   tabIndex: any = 0;
   constructor(public dialog: MatDialog) { }
-
+  updateConn=false;
+  updateConfig=false;
+  updateAsset=false;
+  updateSensor=false;
   ngOnInit(): void {
   }
   tabChanged(e:any) {
@@ -31,27 +34,44 @@ export class ControlPanelComponent implements OnInit {
     this.tabIndex = e.index;//active tab
   }
   openDialog() {
+    this.updateConn=false;
     console.log(this.tabIndex ,tabLabel.Connections,tabLabel.Sensors)
     if (this.tabIndex === tabLabel.Connections) {
-      this.dialog.open(AddConnectionComponent, {
+      let dialogRef=this.dialog.open(AddConnectionComponent, {
         width: '800px',
         data: null
+      });
+      dialogRef.afterClosed().subscribe(result => {
+
+        this.updateConn=true;
       });
     } else if (this.tabIndex === tabLabel.Sensors) {
-      this.dialog.open(AddSensorComponent, {
+      let dialogRef=this.dialog.open(AddSensorComponent, {
         width: '800px',
         data: null
+      });
+      dialogRef.afterClosed().subscribe(result => {
+
+        this.updateSensor=true;
       });
     } else if (this.tabIndex === tabLabel.Configuration) {
-      this.dialog.open(AddAssetConfigComponent, {
-        width: '800px',
+      const dialogRef=this.dialog.open(AddAssetConfigComponent, {
+        width: '900px',
         data: null
+      });
+      dialogRef.afterClosed().subscribe(result => {
+
+        this.updateConfig=true;
       });
     } else if (this.tabIndex === tabLabel.Asset) {
-      this.dialog.open(AddAssetComponent, {
+      const dialogRef=this.dialog.open(AddAssetComponent, {
         width: '800px',
         data: null
       });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.updateAsset=true;
+    });
     }
   }
   dialogClose(e: any) {

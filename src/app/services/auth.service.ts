@@ -92,6 +92,11 @@ export class AuthService {
       return response;
     }))
   }
+  deleteAsset(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/deleteAssetByID`, params, options).pipe(map(response => {
+      return response;
+    }))
+  }
 
   // chart request add
   

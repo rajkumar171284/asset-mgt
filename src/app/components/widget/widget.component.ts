@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddAssetComponent } from '../../components/dialogs/add-asset/add-asset.component';
@@ -10,7 +10,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TooltipComponent } from '../../components/tooltip/tooltip.component';
 
 export interface Fruit {
@@ -43,23 +43,30 @@ export class WidgetComponent implements OnInit {
   options: any[] = ['One', 'Two', 'Three'];
   newForm: FormGroup;
 
-  constructor(private dataService: AuthService,private fb: FormBuilder, public dialog: MatDialog,
-    private _snackBar: MatSnackBar,@Inject(MAT_DIALOG_DATA) public data: any) {
-      this.newForm = this.fb.group({
-        PID: [''],
-        NAME: ['', Validators.required],
-        CHART_TYPE: ['', Validators.required],
-        CHART_DATA:['', Validators.required],
-        SQL_QUERY:[],
-        IS_DRAGGED:0
+  constructor(private dataService: AuthService, private fb: FormBuilder, public dialog: MatDialog,
+    private _snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.newForm = this.fb.group({
+      PID: [''],
+      NAME: ['', Validators.required],
+      CHART_TYPE: ['', Validators.required],
+      CHART_DATA: ['', Validators.required],
+      SQL_QUERY: [],
+      IS_DRAGGED: 0
 
-     })
-     if (data && data.PID) {
-      // this.typeName=data;
+    })
+    console.log(data)
+    if (data && data.PID) {
+      const type = this.chartTypes.filter(x => {
+        return x.name.toLowerCase() === data.NAME.toLowerCase();
+      }).map(result=>{
+        result.isSelected=true;
+        return result;
+      })
+      console.log(type)
       this.newForm.patchValue(data);
-     
+
     }
-    }
+  }
 
   ngOnInit(): void {
     this.getAllAssets();
@@ -79,7 +86,7 @@ export class WidgetComponent implements OnInit {
     })
     a.isSelected = this.isSelected;
     this.newForm.patchValue({
-      NAME:a.name.toLowerCase()
+      NAME: a.name.toLowerCase()
     })
 
 
@@ -93,9 +100,9 @@ export class WidgetComponent implements OnInit {
       const session = await this.dataService.getSessionData();
       this.Values.COMPANY_ID = session.COMPANY_ID;
       this.Values.CREATED_BY = session.PID;
-      const query = `SELECT * FROM ${this.Values.CHART_TYPE} WHERE PID=${this.Values.CHART_DATA}` ;
+      const query = `SELECT * FROM ${this.Values.CHART_TYPE} WHERE PID=${this.Values.CHART_DATA}`;
       this.Values.SQL_QUERY = JSON.stringify(query);
-      this.Values.IS_DRAGGED=0;
+      this.Values.IS_DRAGGED = 0;
       console.log(this.Values)
       this.dataService.addChartRequest(this.Values).subscribe(res => {
         console.log(res)

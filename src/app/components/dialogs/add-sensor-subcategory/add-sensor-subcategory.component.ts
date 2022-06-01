@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Inject, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../../../services/auth.service';
@@ -9,7 +9,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class AddSensorSubcategoryComponent implements OnInit {
   public typeName:any;
-
+  @Input() tabIndex:any;
   @Output() dialogClose: any = new EventEmitter();
   newForm: FormGroup;
   constructor(private dataService: AuthService, private fb: FormBuilder, public dialog: MatDialog,

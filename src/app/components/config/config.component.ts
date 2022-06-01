@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input,OnChanges, SimpleChanges} from '@angular/core';
 import { config } from '../../myclass';
 import { AuthService } from '../../services/auth.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -26,18 +26,19 @@ export interface PeriodicElement {
   styleUrls: ['./config.component.scss'],
   providers: [AuthService]
 })
-export class ConfigComponent implements OnInit {
+export class ConfigComponent implements OnInit,OnChanges {
+  @Input('tabIndex')tabClose:any;
   tabIndex = 0;
   configData: config[] = [];
   displayedColumns: string[] = [
+    "CONFIG_NAME",
     "Asset_Name",
-    "Asset_Type",
     // "Use_Type" , 
     "Industrial_Type",
     "Industrial_Data_source",
     "Connection_Type",
     "Tracking_Device_Type",
-    'Sensor_Type',
+    'NAME',
     "Sub_Category_Sensor_Type",
     "Sensor_Data_Type",
     "MAC_Address", "actions"
@@ -50,6 +51,9 @@ export class ConfigComponent implements OnInit {
     this.getAllAssetConfig();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getAllAssetConfig();
+  }
   async getAllAssetConfig() {
     const session = await this.dataService.getSessionData();
     let params = { COMPANY_ID: session.COMPANY_ID };
@@ -76,10 +80,10 @@ export class ConfigComponent implements OnInit {
       this.getAllAssetConfig();
     })
   }
-  openSnackBar(data:any) {
+  openSnackBar(data: any) {
     this._snackBar.openFromComponent(TooltipComponent, {
       duration: 5 * 1000,
-      data:data.msg
+      data: data.msg
     });
   }
 }

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild ,ChangeDetectionStrategy,ChangeDetectorRef,OnChanges, SimpleChanges, Input} from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { AuthService } from '../../services/auth.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddSensorSubcategoryComponent } from '../dialogs/add-sensor-subcategory/add-sensor-subcategory.component';
 import { AddSensorComponent } from '../../components/dialogs/add-sensor/add-sensor.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 interface PeriodicElement {
   PID: number;
@@ -15,6 +17,7 @@ interface PeriodicElement {
   selector: 'app-sensors',
   templateUrl: './sensors.component.html',
   styleUrls: ['./sensors.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -23,16 +26,23 @@ interface PeriodicElement {
     ]),
   ],
 })
-export class SensorsComponent implements OnInit {
+export class SensorsComponent implements OnInit ,OnChanges{
+  @Input('tabIndex')tabIndex:any;
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator | null;
+
   expandedElement: PeriodicElement | null | undefined;
   indexedSensor: any;
-  dataSource = [];
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumns: string[] = [
-    "PID", "NAME", "actions"]
-  constructor(private dataService: AuthService, public dialog: MatDialog) { }
+    "PID", "NAME"]
+  constructor(private dataService: AuthService, public dialog: MatDialog,private ref:ChangeDetectorRef) { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+  }
   ngOnInit(): void {
-    this.expandedElement=null
+    console.log(this.expandedElement)
     this.getSensors();
   }
 
@@ -40,10 +50,14 @@ export class SensorsComponent implements OnInit {
     const session = await this.dataService.getSessionData();
     let params = { COMPANY_ID: session.COMPANY_ID };
     this.dataService.getAllSensors(params).subscribe(res => {
+      this.ref.detectChanges();
+      this.dataSource= new MatTableDataSource(res.data);
+      this.dataSource.paginator =this.paginator;
       this.dataSource = res.data.map((el: any, index: number) => {
         el.sno = index + 1;
         return el;
       });
+
     })
   }
 
@@ -68,15 +82,10 @@ export class SensorsComponent implements OnInit {
   toggleTableRows() {
     this.isTableExpanded = !this.isTableExpanded;
 
-    this.dataSource.forEach((row: any) => {
-      row.isExpanded = this.isTableExpanded;
-    })
-  }
+    }
   expandItem(element: any) {
-    console.log(element)
-    this.dataSource.forEach((row: any) => {
-      row.isExpanded = this.isTableExpanded;
-    })
+    // console.log(element)
+   
     this.expandedElement = this.expandedElement === element ? null : element
     this.indexedSensor = element;
     this.getindexedSensor(this.indexedSensor);

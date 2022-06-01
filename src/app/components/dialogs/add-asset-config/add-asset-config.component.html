@@ -1,109 +1,198 @@
 <mat-toolbar color="primary">
     <mat-grid-list class="title-center" cols="1" rowHeight="1:1">
-        {{typeName && typeName.PID?'Edit Connection':'Add New Connection'}}
+        {{typeName && typeName.PID?'Edit Config':'Add New Config'}}
     </mat-grid-list>
-    
+
 </mat-toolbar>
 <form class="form-container" [formGroup]="newForm">
-    <mat-grid-list cols="2" rowHeight="2:1">
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field>
+                <mat-label>CONFIG NAME</mat-label>
+                <input formControlName="CONFIG_NAME" matInput placeholder="" type="text" class="example-right-align">
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field>
+                <mat-label>ASSET</mat-label>
+                <!-- <input formControlName="ASSET_TYPE" matInput placeholder="" type="text" class="example-right-align"> -->
+                <mat-select formControlName="ASSET_ID">
 
-        <mat-form-field>
-            <mat-label>ASSET NAME</mat-label>
-            <input formControlName="ASSET_NAME" matInput placeholder="" type="text" class="example-right-align">
-           </mat-form-field>
+                    <mat-option *ngFor="let key of assetTypes" [value]="key.PID">
+                        {{key.NAME}}
+                    </mat-option>
 
-        <mat-form-field>
-            <mat-label>ASSET TYPE</mat-label>
-            <input formControlName="ASSET_TYPE" matInput placeholder="" type="text" class="example-right-align">
-           </mat-form-field>
+                </mat-select>
+
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field>
+                <mat-label>INDUSTRIAL TYPE</mat-label>
+                <!-- <input matInput formControlName="INDUSTRIAL_TYPE" placeholder="" type="text" class="example-right-align"> -->
+                <mat-select formControlName="INDUSTRIAL_TYPE">
+
+                    <mat-option *ngFor="let key of industryType" [value]="key">
+                        {{key}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field>
+                <mat-label>INDUSTRIAL DATA SOURCE</mat-label>
+                <!-- <input matInput formControlName="INDUSTRIAL_DATA_SOURCE" placeholder="" type="text" class="example-right-align"> -->
+                <mat-select formControlName="INDUSTRIAL_DATA_SOURCE">
+
+                    <mat-option *ngFor="let key of IndustrialDataSource" [value]="key">
+                        {{key}}
+                    </mat-option>
+
+                </mat-select>
+
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field>
+                <mat-label>SELECT CONNECTION TYPE</mat-label>
+                <mat-select formControlName="CONNECTION_TYPE">
+
+                    <mat-option *ngFor="let key of assetConn" [value]="key.NAME">
+                        {{key.NAME}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field>
+                <mat-label>TRACKING DEVICE </mat-label>
+                <!-- <input matInput formControlName="TRACKING_DEVICE" placeholder="" type="text" class="example-right-align"> -->
+                <mat-select formControlName="TRACKING_DEVICE">
+
+                    <mat-option *ngFor="let key of trackingDevices" [value]="key">
+                        {{key}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field>
+                <mat-label>SELECT SENSOR</mat-label>
+                <mat-select (selectionChange)="onSENSORChange($event)" formControlName="SENSOR">
+
+                    <mat-option *ngFor="let key of assetSensors" [value]="key.PID">
+                        {{key.NAME}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field *ngIf="assetSubSensors.length==0">
+                <mat-label>SENSOR CATEGORY</mat-label>
+                <input matInput formControlName="SENSOR_CATEGORY" placeholder="(optional)" type="text"
+                    class="example-right-align">
+
+            </mat-form-field>
+            <mat-form-field *ngIf="assetSubSensors.length>0">
+                <mat-label>SENSOR CATEGORY</mat-label>
+                <mat-select formControlName="SENSOR_CATEGORY">
+
+                    <mat-option *ngFor="let key of assetSubSensors" [value]="key.CATEGORY_NAME">
+                        {{key.CATEGORY_NAME}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field>
+                <mat-label>SENSOR DATA TYPE</mat-label>
+                <!-- <input matInput formControlName="SENSOR_DATA_TYPE" placeholder="" type="text" class="example-right-align"> -->
+                <mat-select formControlName="SENSOR_DATA_TYPE">
+    
+                    <mat-option *ngFor="let key of SensorData" [value]="key">
+                        {{key}}
+                    </mat-option>
+    
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+
+    <mat-grid-list cols="1" rowHeight="2:1">
+        <mat-label>MAC DETAILS</mat-label>
 
     </mat-grid-list>
+    <mat-grid-list style="background:#f3f3f3" cols="1" rowHeight="2:1">
+        <div class="row">
+            <div class="col-md-6">
+                <ng-container formArrayName="MAC_DETAILS">
+                    <ng-container>
+                        <button (click)="addMAC()" mat-raised-button><mat-icon>library_add</mat-icon>
+                        </button>
+                    </ng-container>
+                    <ng-container *ngFor="let item of MAC_DETAILS.controls; let i = index">
+        
+                        <div [formGroupName]="i">
+                            <mat-grid-list cols="2" rowHeight="2:1">
+        
+        
+                                <mat-form-field>
+                                    <mat-label>NAME</mat-label>
+                                    <input matInput formControlName="NAME" placeholder="" type="text"
+                                        class="example-right-align">
+                                </mat-form-field>
+        
+                                <mat-form-field>
+                                    <mat-label>ADDRESS</mat-label>
+                                    <input matInput formControlName="ADDRESS" placeholder="" type="text"
+                                        class="example-right-align">
+                                </mat-form-field>
+        
+                            </mat-grid-list>
+                            <mat-grid-list cols="2" rowHeight="2:1">
+        
+        
+                                <mat-form-field>
+                                    <mat-label>LOCATION</mat-label>
+                                    <input matInput formControlName="LOCATION" placeholder="" type="text"
+                                        class="example-right-align">
+                                </mat-form-field>
+        
+                                <!-- <mat-form-field> -->
+                                <mat-label>STATUS</mat-label>
+        
+                                <mat-radio-group formControlName="STATUS" aria-label="Select an option">
+                                    <mat-radio-button [value]="macActive">Active</mat-radio-button>
+                                    <mat-radio-button [value]="macInactive">In Active</mat-radio-button>
+                                </mat-radio-group>
+        
+                                <!-- </mat-form-field>  -->
+        
+                            </mat-grid-list>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
 
-    <mat-grid-list cols="2" rowHeight="2:1">
-
-        <mat-form-field>
-            <mat-label>INDUSTRIAL TYPE</mat-label>
-            <input matInput formControlName="INDUSTRIAL_TYPE" placeholder="" type="text" class="example-right-align">
-          
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>INDUSTRIAL DATA SOURCE</mat-label>
-            <input matInput formControlName="INDUSTRIAL_DATA_SOURCE" placeholder="" type="text" class="example-right-align">
-          </mat-form-field>
-
-    </mat-grid-list>
-    <mat-grid-list cols="2" rowHeight="2:1">
-
-        <mat-form-field>
-            <mat-label>SELECT CONNECTION TYPE</mat-label>
-            <mat-select formControlName="CONNECTION_TYPE">
-               
-                <mat-option *ngFor="let key of assetConn" [value]="key.NAME">
-                {{key.NAME}}    
-                </mat-option>
-               
-              </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>TRACKING DEVICE	</mat-label>
-            <input matInput formControlName="TRACKING_DEVICE" placeholder="" type="text" class="example-right-align">
-          </mat-form-field>
-
-    </mat-grid-list>
-
-    <mat-grid-list cols="2" rowHeight="2:1">
-
-        <mat-form-field>
-            <mat-label>SELECT SENSOR</mat-label>
-            <mat-select  (selectionChange)="onSENSORChange($event)" formControlName="SENSOR">
-               
-                <mat-option *ngFor="let key of assetSensors" [value]="key.PID">
-                {{key.NAME}}    
-                </mat-option>
-               
-              </mat-select>
-        </mat-form-field>
-
-        <mat-form-field *ngIf="assetSubSensors.length==0">
-            <mat-label>SENSOR CATEGORY</mat-label>
-            <input  matInput formControlName="SENSOR_CATEGORY" placeholder="" type="text" class="example-right-align">
-           
-        </mat-form-field>
-        <mat-form-field *ngIf="assetSubSensors.length>0">
-            <mat-label>SENSOR CATEGORY</mat-label>
-            <mat-select  formControlName="SENSOR_CATEGORY">
-               
-                <mat-option *ngFor="let key of assetSubSensors" [value]="key.CATEGORY_NAME">
-                {{key.CATEGORY_NAME}}    
-                </mat-option>
-               
-              </mat-select>  
-        </mat-form-field>
-
-    </mat-grid-list>
-
-    <mat-grid-list cols="2" rowHeight="2:1">
-
-        <mat-form-field>
-            <mat-label>SENSOR DATA TYPE</mat-label>
-            <input matInput formControlName="SENSOR_DATA_TYPE" placeholder="" type="text" class="example-right-align">
-          
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>MAC ADDRESS</mat-label>
-            <input matInput formControlName="MAC_ADDRESS" placeholder="" type="text" class="example-right-align">
-          </mat-form-field>
 
     </mat-grid-list>
     <mat-grid-list cols="10">
         <button (click)="confirmData()" mat-raised-button color="primary">Save</button>
 
-        <button mat-raised-button (click)="confirmClose()"  color="warn">Cancel</button>
+        <button mat-raised-button (click)="confirmClose()" color="warn">Cancel</button>
 
 
-        </mat-grid-list>
+    </mat-grid-list>
 
 </form>

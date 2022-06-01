@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Inject, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../../../services/auth.service';
@@ -8,7 +8,7 @@ import { AuthService } from '../../../services/auth.service';
   styleUrls: ['./add-connection.component.scss']
 })
 export class AddConnectionComponent implements OnInit {
-
+  @Input() tabIndex:any;
   @Output() dialogClose: any = new EventEmitter();
   newForm: FormGroup;
   public typeName:any;

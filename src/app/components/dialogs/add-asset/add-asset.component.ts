@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../../../services/auth.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TooltipComponent } from '../../../components/tooltip/tooltip.component';
 
 @Component({
@@ -13,26 +13,35 @@ import { TooltipComponent } from '../../../components/tooltip/tooltip.component'
 export class AddAssetComponent implements OnInit {
   @Output() dialogClose: any = new EventEmitter();
   newForm: FormGroup;
-  public typeName:any;
+  public typeName: any;
+  assetTypes = ['Security',
+
+    'Activity Trackers',
+
+    'Industrial Security and Safety ',
+
+    ' Augmented Reality Glasses  ',
+
+    'Motion Detection']
   constructor(private dataService: AuthService, private fb: FormBuilder, public dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,private _snackBar: MatSnackBar) {
+    @Inject(MAT_DIALOG_DATA) public data: any, private _snackBar: MatSnackBar) {
     this.newForm = this.fb.group({
       PID: [''],
       NAME: ['', Validators.required],
       ASSET_TYPE: ['', Validators.required],
-      COMPONENTS: ['', Validators.required],
+      COMPONENTS: [''],
     })
     console.log(data)
     if (data && !data.PID) {
       console.log(data)
       // add
-     
-     
+
+
 
     } else if (data && data.PID) {
-      this.typeName=data;
+      this.typeName = data;
       this.newForm.patchValue(data);
-     
+
     }
   }
 
@@ -64,10 +73,10 @@ export class AddAssetComponent implements OnInit {
     this.dialog.closeAll()
 
   }
-  openSnackBar(data:any) {
+  openSnackBar(data: any) {
     this._snackBar.openFromComponent(TooltipComponent, {
       duration: 5 * 1000,
-      data:data
+      data: data
     });
   }
 }

@@ -60,13 +60,13 @@
 
           <div cdkDropList #moviesList="cdkDropList" [cdkDropListData]="MoviesList"
             [cdkDropListConnectedTo]="[doneMovieList]" class="example-list2" (cdkDropListDropped)="onDrop($event)">
-            <div class="movie-block" [cdkDragData]="List" *ngFor="let List of MoviesList" cdkDrag>
+            <div class="Widget-block" [cdkDragData]="List" *ngFor="let List of MoviesList" cdkDrag>
 
               <!-- {{List}} -->
               <mat-card class="listed-charts" color="primary">
 
                 <span class="mapped-close">
-                  <mat-icon (click)="editRequest(List)" color="success">edit</mat-icon>
+                  <mat-icon (click)="editRequest(List)" color="primary">edit</mat-icon>
                   <mat-icon (click)="removeRequest(List)" color="warn">delete_outline</mat-icon>
                   
 

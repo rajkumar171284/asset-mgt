@@ -17,13 +17,21 @@
 
         <mat-form-field>
             <mat-label>Asset Type</mat-label>
-            <input formControlName="ASSET_TYPE" matInput placeholder="" type="text" class="example-right-align">
-           </mat-form-field>
+            <!-- <input formControlName="ASSET_TYPE" matInput placeholder="" type="text" class="example-right-align"> -->
+           
+            <mat-select formControlName="ASSET_TYPE">
+
+                <mat-option *ngFor="let key of assetTypes" [value]="key">
+                    {{key}}
+                </mat-option>
+
+            </mat-select>
+        </mat-form-field>
     </mat-grid-list>
     <mat-grid-list cols="1" rowHeight="2:1">
 
         <mat-form-field>
-            <mat-label>COMPONENTS</mat-label>
+            <mat-label>COMPONENTS(optional)</mat-label>
             <input formControlName="COMPONENTS" matInput placeholder="" type="text" class="example-right-align">
            </mat-form-field>
     </mat-grid-list>

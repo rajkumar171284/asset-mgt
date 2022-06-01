@@ -12,16 +12,16 @@
               <td mat-cell *matCellDef="let element"> {{element.position}} </td>
             </ng-container> -->
 
+
+
+      <ng-container matColumnDef="CONFIG_NAME">
+        <th mat-header-cell *matHeaderCellDef> CONFIG NAME</th>
+        <td mat-cell *matCellDef="let element"> {{element.CONFIG_NAME}} </td>
+      </ng-container>
       <ng-container matColumnDef="Asset_Name">
         <th mat-header-cell *matHeaderCellDef> Asset Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.ASSET_NAME}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.NAME}} </td>
       </ng-container>
-
-      <ng-container matColumnDef="Asset_Type">
-        <th mat-header-cell *matHeaderCellDef> Asset Type </th>
-        <td mat-cell *matCellDef="let element"> {{element.ASSET_TYPE}} </td>
-      </ng-container>
-
       <ng-container matColumnDef="Industrial_Type">
         <th mat-header-cell *matHeaderCellDef> Industrial Type </th>
         <td mat-cell *matCellDef="let element"> {{element.INDUSTRIAL_TYPE}} </td>
@@ -41,9 +41,9 @@
         <td mat-cell *matCellDef="let element"> {{element.TRACKING_DEVICE}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="Sensor_Type">
+      <ng-container matColumnDef="NAME">
         <th mat-header-cell *matHeaderCellDef> Sensor </th>
-        <td mat-cell *matCellDef="let element"> {{element.SENSOR}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.NAME}} </td>
       </ng-container>
       <ng-container matColumnDef="Sub_Category_Sensor_Type">
         <th mat-header-cell *matHeaderCellDef>Sensor Category</th>

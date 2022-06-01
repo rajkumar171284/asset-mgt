@@ -4,15 +4,30 @@
 
 .listed-charts {
     margin-bottom: 5px;
-    padding: 5px 0;position: relative;
+    padding: 5px 0;
+    position: relative;
 }
-.mapped-close{
+
+.mapped-close {
     position: absolute;
-    top:3px;right:5px;z-index: 3;
+    top: 3px;
+    right: 5px;
+    z-index: 3;
 }
+
 .listed-charts img {
     height: 50px;
-    float: right;
+    margin-top: 6px; filter: brightness(0) invert(1); 
+}
+
+.Widget-block .listed-charts {
+    // background: rgba(0,0,0,.7);
+    background:rgba(255, 255, 255, 0.3);
+    border: 1px solid #fff;
+
+    mat-card-subtitle ,mat-card-content{
+        color: #fff !important
+    }
 }
 
 .widget-panel {
@@ -29,7 +44,7 @@
 
 .listed-charts mat-card-content {
     display: flex;
-    justify-content: left;
+    justify-content: space-evenly;
 }
 
 .listed-charts mat-card-subtitle {
