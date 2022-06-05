@@ -148,6 +148,8 @@ export class DashboardComponent implements OnInit {
         return value[0].CHART_DATA;
       } else if (value[0] && val == 'json') {
         return value[0]
+      } else if (value[0] && val == 'l') {
+        return value[0].CHART_TYPE
       }
     }
   }

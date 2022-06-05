@@ -66,6 +66,12 @@ import { AssetTypeComponent } from '../components/asset-type/asset-type.componen
 import { TooltipComponent } from '../components/tooltip/tooltip.component';
 import { DashboardComponent } from '../components/dashboard/dashboard.component';
 import { WidgetComponent } from '../components/widget/widget.component';
+import { AddMacDetailsComponent } from '../components/dialogs/add-mac-details/add-mac-details.component';
+import { PlotlyComponent } from '../components/plotly/plotly.component';
+
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [SidenavComponent, ConfigComponent, ControlPanelComponent,
@@ -74,10 +80,12 @@ import { WidgetComponent } from '../components/widget/widget.component';
     AddSensorComponent,
     AddConnectionComponent,
     AddAssetComponent,
-    AssetTypeComponent,TooltipComponent, DashboardComponent, WidgetComponent
+    AssetTypeComponent,TooltipComponent, DashboardComponent, WidgetComponent,
+    AddMacDetailsComponent,
+    PlotlyComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule,PlotlyModule,
     SharedRoutingModule, FormsModule, ReactiveFormsModule,
     A11yModule,
     ClipboardModule,

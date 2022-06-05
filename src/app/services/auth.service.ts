@@ -41,6 +41,22 @@ export class AuthService {
       return response;
     }))
   }
+  // mac details
+  getMACByConfigID(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/getMACdetailsByConfigID`,params, options).pipe(map(response => {
+      return response;
+    }))
+  }
+  addMACByConfigID(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/addMACByConfigID`,params, options).pipe(map(response => {
+      return response;
+    }))
+  }
+  updateMACByConfigID(params: any): Observable<any> {
+    return this.http.post(`${environment.url}/asset/updateMACByConfigID`,params, options).pipe(map(response => {
+      return response;
+    }))
+  }
   // asset connection starts
   addConnection(params: any): Observable<any> {
     return this.http.post(`${environment.url}/asset/addConnection`, params, options).pipe(map(response => {
@@ -117,6 +133,12 @@ export class AuthService {
   }
   chartRequestChangeStatus(params: any): Observable<any> {
     return this.http.post(`${environment.url}/asset/chartRequestChangeStatus`,params, options).pipe(map(response => {
+      return response;
+    }))
+  }
+  // mac 
+  getMACstatus(params: any): Observable<any> {
+    return this.http.get(`${environment.url}/asset/getMACstatusByAssetConfigID`, options).pipe(map(response => {
       return response;
     }))
   }

@@ -6,11 +6,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TooltipComponent } from '../../../components/tooltip/tooltip.component';
 
 @Component({
-  selector: 'app-add-asset-config',
-  templateUrl: './add-asset-config.component.html',
-  styleUrls: ['./add-asset-config.component.scss'], providers: [AuthService]
+  selector: 'app-add-mac-details',
+  templateUrl: './add-mac-details.component.html',
+  styleUrls: ['./add-mac-details.component.scss']
 })
-export class AddAssetConfigComponent implements OnInit, OnChanges {
+export class AddMacDetailsComponent implements OnInit {
   @Input() tabIndex: any;
   industryType = ['Healthcare',
     'Manufacturing',
@@ -58,16 +58,6 @@ export class AddAssetConfigComponent implements OnInit, OnChanges {
     @Inject(MAT_DIALOG_DATA) public data: any, private _snackBar: MatSnackBar) {
     this.newForm = this.fb.group({
       PID: [''],
-      CONFIG_NAME: ['', Validators.required],
-      ASSET_ID: ['', Validators.required],
-      INDUSTRIAL_TYPE: ['', Validators.required],
-      INDUSTRIAL_DATA_SOURCE: ['', Validators.required],
-      CONNECTION_TYPE: ['', Validators.required],
-      TRACKING_DEVICE: ['', Validators.required],
-      SENSOR: ['', Validators.required],
-      SENSOR_CATEGORY: [''],
-      SENSOR_DATA_TYPE: ['', Validators.required],
-      // MAC_ADDRESS: ['', Validators.required],
       MAC_DETAILS: this.fb.array([])
 
     })
@@ -77,14 +67,14 @@ export class AddAssetConfigComponent implements OnInit, OnChanges {
       // edit
       this.typeName = data;
       this.newForm.patchValue(data);
-      this.newForm.patchValue({
-        SENSOR: parseInt(data.SENSOR),
-        ASSET_TYPE: parseInt(data.ASSET_TYPE),
+      // this.newForm.patchValue({
+      //   SENSOR: parseInt(data.SENSOR),
+      //   ASSET_TYPE: parseInt(data.ASSET_TYPE),
 
-      })
+      // })
     }
 
-    this.initCall()
+    // this.initCall()
   }
   get MAC_DETAILS(): FormArray {
     return this.newForm.get('MAC_DETAILS') as FormArray;
@@ -161,7 +151,7 @@ export class AddAssetConfigComponent implements OnInit, OnChanges {
       this.Values.COMPANY_ID = session.COMPANY_ID
       this.Values.CREATED_BY = session.PID;
       console.log(this.Values)
-      this.dataService.addAssetConfig(this.Values).subscribe(res => {
+      this.dataService.addMACByConfigID(this.Values).subscribe(res => {
         console.log(res)
         this.dialogClose.emit(true);
         this.confirmClose();
@@ -233,5 +223,4 @@ export class AddAssetConfigComponent implements OnInit, OnChanges {
 
   }
   
-
 }

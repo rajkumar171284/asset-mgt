@@ -74,11 +74,7 @@
 
         </tr>
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-        <!-- <tr *ngIf="dataSource.length==0">
-
-            <td mat-cell *matCellDef> No Data </td>
-
-        </tr> -->
+        
     </table>
     <mat-paginator [length]="100" #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
     </mat-paginator>

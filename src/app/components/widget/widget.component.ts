@@ -40,7 +40,8 @@ export class WidgetComponent implements OnInit {
   // myControl = new FormControl();
   // myControlType = new FormControl();
 
-  options: any[] = ['One', 'Two', 'Three'];
+  options: any[] = [];
+  options2: any[] = ['Status', 'Location'];
   newForm: FormGroup;
 
   constructor(private dataService: AuthService, private fb: FormBuilder, public dialog: MatDialog,

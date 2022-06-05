@@ -4,9 +4,7 @@
     <div class="col-md-9 ">
 
 
-      <div class="container mt-3 ">
-        <!-- <h2>dragged list</h2> -->
-
+      <div class="container mt-3 " style="padding-left:0px;padding-right:0px;">
         
 
           <div class="row pb-4" cdkDropList #doneMovieList="cdkDropList" [cdkDropListData]="MoviesWatched"
@@ -21,15 +19,17 @@
 
                   </span>
   
-                  <mat-card-subtitle>
+                  <!-- <mat-card-subtitle>
                     {{getRequestDetails(List,'n')}}
-                  </mat-card-subtitle>
-                  <mat-card-content>
-                    {{getRequestDetails(List,'d')}}
+                  </mat-card-subtitle> -->
+                  <!-- <mat-card-content> -->
+                    <!-- {{getRequestDetails(List,'d')}} -->
   
-                    <img class="" src="assets/{{getRequestDetails(List,'n')}}-outline-chart.png" />
+                    <!-- <img class="" src="assets/{{getRequestDetails(List,'n')}}-outline-chart.png" /> -->
+                    <app-plotly  pMap="{{getRequestDetails(List,'n')}}"></app-plotly>
+
   
-                  </mat-card-content>
+                  <!-- </mat-card-content> -->
                 </mat-card>
   
               </div>

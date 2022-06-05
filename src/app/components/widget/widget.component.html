@@ -35,14 +35,14 @@
         <mat-expansion-panel (opened)="panelOpenState2 = true" (closed)="panelOpenState2 = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Chart Columns
+                    Chart Source
                 </mat-panel-title>
 
             </mat-expansion-panel-header>
 
             <!-- content -->
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Data Columns</mat-label>
+                <mat-label>Select Source</mat-label>
 
                 <mat-select formControlName="CHART_TYPE">
 
@@ -62,7 +62,7 @@
         <mat-expansion-panel (opened)="panelOpenState3 = true" (closed)="panelOpenState3 = false">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Chart Data
+                    Chart Label
                 </mat-panel-title>
 
             </mat-expansion-panel-header>
@@ -70,11 +70,11 @@
             <!-- content -->
 
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Data Source</mat-label>
+                <mat-label>Select Label</mat-label>
                 <mat-select formControlName="CHART_DATA">
 
-                    <mat-option *ngFor="let key of options" [value]="key.ASSET_TYPE">
-                        {{key.ASSET_TYPE}}
+                    <mat-option *ngFor="let key of options2" [value]="key">
+                        {{key}}
                     </mat-option>
 
                 </mat-select>
